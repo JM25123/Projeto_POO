@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Main {
@@ -155,20 +156,17 @@ public class Main {
         System.out.print("Texto a imprimir: ");
         String dados = sc.nextLine();
 
-        System.out.println("Posição: 0-Esquerda 1-Centro 2-Direita");
-        int posicao = lerInteiro(sc, "Posição: ");
+        System.out.println("Posição: 1-Centro");
+        int posicao = 1;
 
-        System.out.println("Estilo: 0-Fonte A 1-Fonte B 2-Sublinhado 4-Invertido 8-Negrito");
-        int estilo = lerInteiro(sc, "Estilo: ");
+        System.out.println("Estilo: 4-Invertido");
+        int estilo = 4;
 
-        System.out.println("Tamanho: 0-Normal, 1 a 7-Maior");
-        int tamanho = lerInteiro(sc, "Tamanho: ");
+        System.out.println("Tamanho: 0-Normal");
+        int tamanho = 0;
 
-        int copias = lerInteiro(sc, "Quantas cópias deseja imprimir? ");
-        if (copias < 1) {
-            System.out.println("Valor inválido, imprimindo 1 cópia.");
-            copias = 1;
-        }
+        System.out.println("Imprimindo uma copia...");
+        int copias = 1;
 
         for (int i = 1; i <= copias; i++) {
             impressora.imprimirTexto(dados, posicao, estilo, tamanho);
@@ -181,8 +179,9 @@ public class Main {
         System.out.print("Conteúdo do QR Code: ");
         String dados = sc.nextLine();
 
-        int tamanho = lerInteiro(sc, "Tamanho (1 a 6): ");
-        int nivelCorrecao = lerInteiro(sc, "Nível de correção (1 a 4): ");
+        System.out.println("Tamanho: 4, Nivel de Correcao: 4.");
+        int tamanho = 4;
+        int nivelCorrecao = 4;
 
         impressora.imprimirQRCode(dados, tamanho, nivelCorrecao);
     }
@@ -190,17 +189,16 @@ public class Main {
 
     //Codigo de barras
     public static void opcaoImprimirCodigoBarras(Scanner sc, Impressora impressora) {
-        System.out.println("Tipo: 0-UPC-A 2-EAN13 3-EAN8 4-CODE39 8-CODE128");
-        int tipo = lerInteiro(sc, "Tipo: ");
+        System.out.println("8-CODE128");
+        int tipo = 8;
 
         System.out.print("Dados do código: ");
         String dados = sc.nextLine();
 
-        int altura = lerInteiro(sc, "Altura (1 a 255): ");
-        int largura = lerInteiro(sc, "Largura (1 a 6): ");
-
-        System.out.println("HRI: 1-Acima 2-Abaixo 3-Ambos 4-Não imprime");
-        int hri = lerInteiro(sc, "HRI: ");
+        System.out.println("Imprimindo configuracoes Padrao.");
+        int altura = 100;
+        int largura = 2;
+        int hri = 3;
 
         impressora.imprimirCodigoBarras(tipo, dados, altura, largura, hri);
     }
@@ -234,8 +232,8 @@ public class Main {
     //faz o bip
     public static void opcaoSinalSonoro(Scanner sc, Impressora impressora) {
         int qtd = lerInteiro(sc, "Quantidade de bips (1 a 63): ");
-        int tempoInicio = lerInteiro(sc, "Tempo de duração do bip: ");
-        int tempoFim = lerInteiro(sc, "Tempo entre bips (1 a 25): ");
+        int tempoInicio = 10;
+        int tempoFim = 10;
         impressora.sinalSonoro(qtd, tempoInicio, tempoFim);
     }
 

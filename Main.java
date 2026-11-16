@@ -137,11 +137,17 @@ public class Main {
     // Padronizada: usa direto os valores de teste sugeridos no roteiro
     // (USB + i9), sem perguntar nada. Troquem aqui se o grupo for testar
     // com outro modelo ou tipo de conexão.
-    public static void opcaoConfigurarConexao(Impressora impressora) {
-        int tipo = 1;          // 1 = USB
-        String modelo = "i9";   // ou "i8", conforme a impressora do grupo
-        String conexao = "USB";
-        int parametro = 0;      // 0 para USB
+    public static void opcaoConfigurarConexao(Scanner sc, Impressora impressora) {
+        System.out.println("Tipos: 1-USB  2-Serial(RS232)  3-Rede(TCP/IP)  4-Bluetooth");
+        int tipo = lerInteiro(sc, "Tipo de conexão: ");
+
+        System.out.print("Modelo da impressora (i8, i9): ");
+        String modelo = sc.nextLine();
+
+        System.out.print("Conexão (USB): ");
+        String conexao = sc.nextLine();
+
+        int parametro = lerInteiro(sc, "Parâmetro (0 se for USB): ");
 
         impressora.configurarConexao(tipo, modelo, conexao, parametro);
     }

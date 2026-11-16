@@ -1,4 +1,3 @@
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Main {
@@ -27,7 +26,7 @@ public class Main {
 
             switch (opcao) {
                 case 1:
-                    opcaoConfigurarConexao(sc, impressora);
+                    opcaoConfigurarConexao(impressora);
                     break;
                 case 2:
                     impressora.abrirConexao();
@@ -62,7 +61,7 @@ public class Main {
                     break;
                 case 9:
                     if (precisaDeConexao(impressora)) {
-                        opcaoAbrirGaveta(sc, impressora);
+                        opcaoAbrirGaveta(impressora);
                     }
                     break;
                 case 10:
@@ -135,17 +134,14 @@ public class Main {
 
     // ============= OPÇÕES DO MENU =============
 
-    public static void opcaoConfigurarConexao(Scanner sc, Impressora impressora) {
-        System.out.println("Tipos: 1-USB  2-Serial(RS232)  3-Rede(TCP/IP)  4-Bluetooth");
-        int tipo = lerInteiro(sc, "Tipo de conexão: ");
-
-        System.out.print("Modelo da impressora (i8, i9): ");
-        String modelo = sc.nextLine();
-
-        System.out.print("Conexão (USB): ");
-        String conexao = sc.nextLine();
-
-        int parametro = lerInteiro(sc, "Parâmetro (0 se for USB): ");
+    // Padronizada: usa direto os valores de teste sugeridos no roteiro
+    // (USB + i9), sem perguntar nada. Troquem aqui se o grupo for testar
+    // com outro modelo ou tipo de conexão.
+    public static void opcaoConfigurarConexao(Impressora impressora) {
+        int tipo = 1;          // 1 = USB
+        String modelo = "i9";   // ou "i8", conforme a impressora do grupo
+        String conexao = "USB";
+        int parametro = 0;      // 0 para USB
 
         impressora.configurarConexao(tipo, modelo, conexao, parametro);
     }
@@ -220,11 +216,12 @@ public class Main {
     }
 
 
-    //abre a gaveta
-    public static void opcaoAbrirGaveta(Scanner sc, Impressora impressora) {
-        int pino = lerInteiro(sc, "Pino (0 ou 1): ");
-        int ti = lerInteiro(sc, "Tempo de inicialização do pulso (1 a 255): ");
-        int tf = lerInteiro(sc, "Tempo de desativação do pulso (1 a 255): ");
+    // Padronizada: abre a gaveta direto com valores de exemplo do roteiro,
+    // sem perguntar nada.
+    public static void opcaoAbrirGaveta(Impressora impressora) {
+        int pino = 0;
+        int ti = 5;
+        int tf = 10;
         impressora.abrirGaveta(pino, ti, tf);
     }
 

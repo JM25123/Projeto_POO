@@ -14,7 +14,9 @@ public class Impressora {
     //boolean = true or false, mudado depois
     public boolean conexaoAberta = false;
 
-
+    // Quanto o papel anda antes do corte automático (corte leve, logo depois
+    // de cada impressão). Valor de exemplo sugerido no roteiro do trabalho.
+    public static final int AVANCO_CORTE_LEVE = 5;
 
     public static final String ASSINATURA_QRCODE_CANCELAMENTO =
             "Q5DLkpdRijIRGY6YSSNsTWK1TztHL1vD0V1Jc4spo/CEUqICEb9SFy82ym8EhBRZjbh3btsZhF+sjHqEMR159i4agru9x6KsepK/q0E2e5xlU5cv3m1woYfgHyOkWDNcSdMsS6bBh2Bpq6s89yJ9Q6qh/J8YHi306ce9Tqb/drKvN2XdE5noRSS32TAWuaQEVd7u+TrvXlOQsE3fHR1D5f1saUwQLPSdIv01NF6Ny7jZwjCwv1uNDgGZONJdlTJ6p0ccqnZvuE70aHOI09elpjEO6Cd+orI7XHHrFCwhFhAcbalc+ZfO5b/+vkyAHS6CYVFCDtYR9Hi5qgdk31v23w==";
@@ -82,10 +84,11 @@ public class Impressora {
     public void imprimirTexto(String dados, int posicao, int estilo, int tamanho) {
         try {
             int retorno = ImpressoraDLL.INSTANCE.ImpressaoTexto(dados, posicao, estilo, tamanho);
-            // Para esse comando o retorno de sucesso é a quantidade de dados
-            // enviados; só é erro se vier um número negativo.
+            // Pra esse comando o retorno de sucesso é a quantidade de dados
+            // enviados. só é erro se vier um número negativo.
             if (retorno >= 0) {
                 System.out.println("Texto enviado para impressão! (" + retorno + " bytes)");
+                cortarPapel();
             } else {
                 System.out.println("Erro ao imprimir texto. Código: " + retorno);
             }
@@ -100,6 +103,7 @@ public class Impressora {
             int retorno = ImpressoraDLL.INSTANCE.ImpressaoQRCode(dados, tamanho, nivelCorrecao);
             if (retorno == 0) {
                 System.out.println("QR Code impresso com sucesso!");
+                cortarPapel();
             } else {
                 System.out.println("Erro ao imprimir QR Code. Código: " + retorno);
             }
@@ -114,6 +118,7 @@ public class Impressora {
             int retorno = ImpressoraDLL.INSTANCE.ImpressaoCodigoBarras(tipo, dados, altura, largura, HRI);
             if (retorno == 0) {
                 System.out.println("Código de barras impresso com sucesso!");
+                cortarPapel();
             } else {
                 System.out.println("Erro ao imprimir código de barras. Código: " + retorno);
             }
@@ -135,6 +140,7 @@ public class Impressora {
             int retorno = ImpressoraDLL.INSTANCE.ImprimeXMLSAT(conteudo, 0);
             if (retorno == 0) {
                 System.out.println("Cupom SAT impresso com sucesso!");
+                cortarPapel();
             } else {
                 System.out.println("Erro ao imprimir cupom SAT. Código: " + retorno);
             }
@@ -157,6 +163,7 @@ public class Impressora {
                     conteudo, ASSINATURA_QRCODE_CANCELAMENTO, 0);
             if (retorno == 0) {
                 System.out.println("Cupom de cancelamento impresso com sucesso!");
+                cortarPapel();
             } else {
                 System.out.println("Erro ao imprimir cancelamento. Código: " + retorno);
             }
@@ -190,6 +197,23 @@ public class Impressora {
             }
         } catch (Throwable e) {
             System.out.println("Erro no sinal sonoro: " + e.getMessage());
+        }
+    }
+
+    // Dá um corte leve no papel, logo depois de uma impressão dar certo.
+    // Não é uma opção do menu: é chamado sozinho, no fim de cada método que
+    // imprime (texto, QR Code, código de barras e os XMLs), igual numa
+    // máquina de recibo de verdade.
+    private void cortarPapel() {
+        try {
+            int retorno = ImpressoraDLL.INSTANCE.Corte(AVANCO_CORTE_LEVE);
+            if (retorno != 0) {
+                System.out.println("Aviso: não foi possível cortar o papel. Código: " + retorno);
+            }
+        } catch (Throwable e) {
+            // Algumas impressoras (ex.: SmartPOS) não têm guilhotina e não
+            // suportam esse comando, então não travamos o programa por isso.
+            System.out.println("Aviso: não foi possível cortar o papel: " + e.getMessage());
         }
     }
 }

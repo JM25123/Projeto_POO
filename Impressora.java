@@ -56,6 +56,8 @@ public class Impressora {
             // Throwable pega tanto o erro de "DLL não encontrada" na primeira tentativa quanto
             // o erro que o Java dá nas tentativas seguintes, depois que a DLL já falhou uma vez.
 
+            //Uma espécie de "filtro" para todos os erros
+
 
             System.out.println("Não foi possível carregar a DLL da impressora: " + e.getMessage());
         }

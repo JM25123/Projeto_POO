@@ -202,22 +202,21 @@ public class Main {
 
     //imprime o XML SAT
     public static void opcaoImprimirXMLSAT(Scanner sc, Impressora impressora) {
-        System.out.print("Caminho do arquivo XML de venda (ex: XMLSAT.xml): ");
-        String caminho = sc.nextLine();
+        System.out.print("Imprimindo XMLSAT.xml ...");
+        String caminho = "XMLSAT.xml";
         impressora.imprimirXMLSAT(caminho);
     }
 
 
     //imprime o XML de cancelamento
     public static void opcaoImprimirXMLCancelamento(Scanner sc, Impressora impressora) {
-        System.out.print("Caminho do arquivo XML de cancelamento (ex: CANC_SAT.xml): ");
-        String caminho = sc.nextLine();
+        System.out.print("Imprimindo CANC_SAT.xml ...");
+        String caminho = "CANC_SAT.xml";
         impressora.imprimirXMLCancelamentoSAT(caminho);
     }
 
 
-    // Padronizada: abre a gaveta direto com valores de exemplo do roteiro,
-    // sem perguntar nada.
+    // Padronizada: abre a gaveta direto com valores de exemplo do roteiro
     public static void opcaoAbrirGaveta(Impressora impressora) {
         int pino = 0;
         int ti = 5;

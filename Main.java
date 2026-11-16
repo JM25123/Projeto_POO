@@ -226,7 +226,7 @@ public class Main {
     }
 
 
-    //faz o bip
+    //faz o bipzao brabo
     public static void opcaoSinalSonoro(Scanner sc, Impressora impressora) {
         int qtd = lerInteiro(sc, "Quantidade de bips (1 a 63): ");
         int tempoInicio = 10;

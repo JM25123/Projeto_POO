@@ -201,18 +201,16 @@ public class Impressora {
     }
 
     // Dá um corte leve no papel, logo depois de uma impressão dar certo.
-    // Não é uma opção do menu: é chamado sozinho, no fim de cada método que
+    // Não é uma opção do menu: é chamado sozinho, no fim de cada metodo
     // imprime (texto, QR Code, código de barras e os XMLs), igual numa
     // máquina de recibo de verdade.
-    private void cortarPapel() {
+    void cortarPapel() {
         try {
             int retorno = ImpressoraDLL.INSTANCE.Corte(AVANCO_CORTE_LEVE);
             if (retorno != 0) {
                 System.out.println("Aviso: não foi possível cortar o papel. Código: " + retorno);
             }
         } catch (Throwable e) {
-            // Algumas impressoras (ex.: SmartPOS) não têm guilhotina e não
-            // suportam esse comando, então não travamos o programa por isso.
             System.out.println("Aviso: não foi possível cortar o papel: " + e.getMessage());
         }
     }

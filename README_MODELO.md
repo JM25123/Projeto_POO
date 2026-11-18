@@ -89,7 +89,7 @@ Se a conexão não estiver aberta, as opções 4 a 10 mostram o aviso "Conexão 
 - Configurar e abrir a conexão, imprimir texto, QR Code, código de barras, XML de venda (`XMLSAT.xml`) e XML de cancelamento (`CANC_SAT.xml`) — com o corte automático acontecendo depois de cada uma dessas 5 impressões.
 - Abrir a gaveta e tocar o bip (confirmado que o papel *não* é cortado nessas duas opções, só nas de impressão).
 - Fechar a conexão e tentar fechar de novo (avisa que já está fechada).
-- *(Preencham aqui os testes feitos na impressora física de verdade em sala.)*
+- *(Todos os testes feitos em sala de aula deram certo)*
 
 ---
 
@@ -100,7 +100,6 @@ Se a conexão não estiver aberta, as opções 4 a 10 mostram o aviso "Conexão 
 ---
 
 ## 👥 Autores
-*(em ordem alfabética)*
 
 - João Marcos
 - Júlio César

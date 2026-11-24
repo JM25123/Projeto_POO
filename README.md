@@ -10,7 +10,7 @@ Este projeto foi desenvolvido por alunos para se comunicar com uma impressora t�
 
 ## 🧰 Tecnologias Utilizadas
 
-- **Java 21**
+- **Java 26**
 - **IntelliJ IDEA**
 - **JNA 5.15.0** (comunicação com a DLL)
 - **DLL E1_Impressora01** (SDK da Elgin)
@@ -101,6 +101,6 @@ Se a conexão não estiver aberta, as opções 4 a 10 mostram o aviso "Conexão 
 
 ## 👥 Autores
 
-- João Marcos
-- Júlio César
-- Laylla Ricci
+- João Marcos (JM25123)
+- Júlio César (julio715)
+- Laylla Ricci (layllricci)
